@@ -1,0 +1,20 @@
+version: "3.8"
+
+networks:
+  bridge-network:
+    external:
+      name: bridge-network
+
+services:
+  minecraft:
+    restart: always
+    image: minecraft
+    build: ./minecraft-docker
+    command: ["java", "-Xmx2048M", "-jar", "server.jar", "true"]
+    networks:
+      - bridge-network
+    volumes:
+      - "./data:/root/minecraft"
+    ports:
+      - "25565:25565"
+      - "25575:25575"
